@@ -1,7 +1,7 @@
 {
   "config": {
     "num_training_episodes": 5,
-    "num_runs": 10,
+    "num_runs": 1000,
     "env_v1": "env_prod_v1",
     "env_v2": "env_prod_v2"
   },

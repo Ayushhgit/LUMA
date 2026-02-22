@@ -138,7 +138,7 @@ SCENARIOS = [
 NUM_TRIALS_PER_PHASE = 25   # 25 pre-drift + 25 post-drift = 50 total
 DRIFT_POINT = 25            # Environment changes at trial 25
 TOTAL_TRIALS = 50
-NUM_RUNS = 10               # Statistical repetitions per scenario
+NUM_RUNS = 1000             # Statistical repetitions per scenario (large-scale)
 CONSOLIDATION_INTERVAL = 5  # Consolidate every N trials
 EXPLORATION_RATE = 0.70     # When memory fails, 70% chance of finding correct answer
 CONSECUTIVE_CORRECT_THRESHOLD = 3  # For adaptation latency metric

@@ -100,7 +100,7 @@ SCENARIOS = [
 ]
 
 NUM_TRAINING_EPISODES = 5  # Per scenario in v1
-NUM_RUNS = 10              # Statistical repetitions
+NUM_RUNS = 1000            # Statistical repetitions (large-scale)
 ENV_V1 = "env_prod_v1"
 ENV_V2 = "env_prod_v2"
 
