@@ -1,14 +1,19 @@
 {
   "config": {
     "num_training_episodes": 5,
-    "num_runs": 1000,
+    "num_runs": 500,
     "env_v1": "env_prod_v1",
-    "env_v2": "env_prod_v2"
+    "env_v2": "env_prod_v2",
+    "scenarios_total": 7,
+    "deterministic_scenarios": 4,
+    "stochastic_scenarios": 3
   },
   "scenarios": {
     "Stable API": {
       "valid_in_v2": true,
-      "description": "Retry-backoff pattern works in both v1 and v2 (stable API)",
+      "validity_prob": 1.0,
+      "probe_noise": 0.0,
+      "description": "Retry-backoff works in both v1 and v2 (stable API)",
       "probe_detection_rate": {
         "mean": 1.0,
         "std": 0.0
@@ -28,7 +33,9 @@
     },
     "Deprecated API": {
       "valid_in_v2": false,
-      "description": "Legacy endpoint was removed in v2 (breaking change)",
+      "validity_prob": 0.0,
+      "probe_noise": 0.0,
+      "description": "Legacy endpoint removed in v2 (breaking change)",
       "probe_detection_rate": {
         "mean": 1.0,
         "std": 0.0
@@ -48,7 +55,9 @@
     },
     "Renamed Module": {
       "valid_in_v2": false,
-      "description": "Module was renamed in v2 (e.g., configparser \u2192 ConfigParser)",
+      "validity_prob": 0.0,
+      "probe_noise": 0.0,
+      "description": "Module renamed in v2 (breaking change)",
       "probe_detection_rate": {
         "mean": 1.0,
         "std": 0.0
@@ -68,7 +77,9 @@
     },
     "Backward Compatible": {
       "valid_in_v2": true,
-      "description": "Explicit casting works across versions (backward compatible)",
+      "validity_prob": 1.0,
+      "probe_noise": 0.0,
+      "description": "Explicit casting works cross-version (backward compatible)",
       "probe_detection_rate": {
         "mean": 1.0,
         "std": 0.0
@@ -85,6 +96,72 @@
         "mean": 0.0,
         "std": 0.0
       }
+    },
+    "Partial Alias": {
+      "valid_in_v2": false,
+      "validity_prob": 0.6,
+      "probe_noise": 0.0,
+      "description": "Deprecated config alias works 60% of the time in v2 (partial validity)",
+      "probe_detection_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "probe_accuracy": {
+        "mean": 0.394,
+        "std": 0.4891
+      },
+      "knowledge_transfer_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "false_negative_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "Flaky Test Env": {
+      "valid_in_v2": true,
+      "validity_prob": 1.0,
+      "probe_noise": 0.15,
+      "description": "Sync runner works in v2 but probe tests are 85% reliable (flaky env)",
+      "probe_detection_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "probe_accuracy": {
+        "mean": 0.826,
+        "std": 0.3795
+      },
+      "knowledge_transfer_rate": {
+        "mean": 0.826,
+        "std": 0.3795
+      },
+      "false_negative_rate": {
+        "mean": 0.174,
+        "std": 0.3795
+      }
+    },
+    "Multi-Library Drift": {
+      "valid_in_v2": false,
+      "validity_prob": 0.0,
+      "probe_noise": 0.1,
+      "description": "Two libraries changed simultaneously (e.g., numpy + pandas upgrade)",
+      "probe_detection_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "probe_accuracy": {
+        "mean": 0.874,
+        "std": 0.3322
+      },
+      "knowledge_transfer_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "false_negative_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      }
     }
   },
   "overall": {
@@ -93,16 +170,16 @@
       "std": 0.0
     },
     "probe_accuracy": {
-      "mean": 1.0,
-      "std": 0.0
+      "mean": 0.8706,
+      "std": 0.3357
     },
     "knowledge_transfer_rate": {
-      "mean": 1.0,
-      "std": 0.0
+      "mean": 0.942,
+      "std": 0.2338
     },
     "false_negative_rate": {
-      "mean": 0.0,
-      "std": 0.0
+      "mean": 0.058,
+      "std": 0.2338
     }
   }
 }
